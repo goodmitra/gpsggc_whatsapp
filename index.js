@@ -4,7 +4,7 @@ const path = require("path");
 const qrcode1 = require("qrcode");
 const exp = require("constants");
 const http = require('http');
-const app = require('./app');
+//const app = require('./app');
 
 
 const app = express();
