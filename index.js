@@ -65,7 +65,7 @@ res.render("scan", {
 
 });
 
-app.get('/wa', async (req, res) => {
+//app.get('/wa', async (req, res) => {
  //   const client = new Client(...)
  /*
     let qr = await new Promise((resolve, reject) => {
@@ -85,7 +85,7 @@ app.get('/wa', async (req, res) => {
       qr_code: src,
     });*/
 	 //res.send('<img src="'qr'">');
-});
+//});
 
 
 app.post("/scan", (req, res, next) => {
