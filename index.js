@@ -3,9 +3,6 @@ const ejs = require("ejs");
 const path = require("path");
 const qrcode1 = require("qrcode");
 const exp = require("constants");
-const http = require('http');
-//const app = require('./app');
-
 
 const app = express();
 
@@ -35,15 +32,8 @@ client.initialize();
 });
 
 const port = process.env.port || 5000;
-//const server = http.createServer(app);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-/*
-server.listen(port, hostname() => {
-	console.log('Stated on port ${port}');
-})*/
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "view"));
