@@ -32,14 +32,15 @@ client.initialize();
 });
 
 const port = process.env.port || 5000;
-const server = http.createServer(app);
+//const server = http.createServer(app);
 
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
+/*
 server.listen(port, hostname() => {
 	console.log('Stated on port ${port}');
-})
+})*/
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "view"));
