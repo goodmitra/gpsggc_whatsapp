@@ -26,8 +26,11 @@ client.on('ready', () => {
 client.initialize();
  
  client.on('message', message => {
-	if(message.body === '!ping') {
-		client.sendMessage(message.from, 'pong');
+	if(message.body === 'gps') {
+		client.sendMessage(message.from, 'Hello Sir How Can I Help You');
+	}
+	else if(message.body === 'hello') {
+		client.sendMessage(message.from, 'Hello Sir How are You');
 	}
 });
 
@@ -50,10 +53,21 @@ app.use(express.static("public"));
 
 app.get("/", (req, res, next) => {
   res.render("index");
+  let qr = await new Promise((resolve, reject) => {
+	client.on('qr', (qr) => resolve(qr))
+})
+qrcode1.toDataURL(qr, (err, src) => {
+if (err) res.send("Something went wrong!!");
+res.render("scan", {
+  qr_code: src,
+});
+});
+
 });
 
 app.get('/wa', async (req, res) => {
  //   const client = new Client(...)
+ /*
     let qr = await new Promise((resolve, reject) => {
         client.on('qr', (qr) => resolve(qr))
     })
@@ -62,7 +76,7 @@ app.get('/wa', async (req, res) => {
     res.render("scan", {
       qr_code: src,
     });
-	});
+	});*/
     //res.send(qr)
 	/*
 	 qrcode1.toDataURL(qr, (err, src) => {
