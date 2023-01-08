@@ -5,16 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>QR Code Generator</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css" type="text/css">
 </head>
 
 <body>
     <div class="container">
+        <h1>QR Code Generator /scan</h1>
+        <hr>
+        <form action="/scan" method="POST" class="form">
+            <textarea name="text" id="text" cols="150" rows="10" placeholder="Enter URL or Text" required></textarea>
+            <button type="submit" class="btn btn-primary">Generate QR Code</button>
 
-        <img src=<%=qr_code %> alt="QR Code">
-        <br>
-        <a href="/" role="button" class="btn btn-primary">Back</a>
+        </form>
+<a href="/wa">wa</a>
     </div>
 </body>
 
