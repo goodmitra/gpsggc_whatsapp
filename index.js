@@ -53,21 +53,10 @@ app.use(express.static("public"));
 
 app.get("/", (req, res, next) => {
   res.render("index");
-  let qr = await new Promise((resolve, reject) => {
-	client.on('qr', (qr) => resolve(qr))
-})
-qrcode1.toDataURL(qr, (err, src) => {
-if (err) res.send("Something went wrong!!");
-res.render("scan", {
-  qr_code: src,
-});
 });
 
-});
-
-//app.get('/wa', async (req, res) => {
+app.get('/wa', async (req, res) => {
  //   const client = new Client(...)
- /*
     let qr = await new Promise((resolve, reject) => {
         client.on('qr', (qr) => resolve(qr))
     })
@@ -76,7 +65,7 @@ res.render("scan", {
     res.render("scan", {
       qr_code: src,
     });
-	});*/
+	});
     //res.send(qr)
 	/*
 	 qrcode1.toDataURL(qr, (err, src) => {
@@ -85,7 +74,7 @@ res.render("scan", {
       qr_code: src,
     });*/
 	 //res.send('<img src="'qr'">');
-//});
+});
 
 
 app.post("/scan", (req, res, next) => {
