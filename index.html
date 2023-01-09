@@ -1,0 +1,72 @@
+<html>
+<head>
+  <title>Express HTML</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+
+  <script>
+    var input = document.getElementById('input')
+    input.addEventListener('change', function() {
+      readXlsxFile(input.files[0]).then(function(rows) {
+        console.log(rows);
+      })
+    })
+  </script>
+  <script>
+    import QRCode from 'qrcode';
+
+  const qrcode = new QRCode(document.getElementById('qrcode'), {
+  text: 'http://jindo.dev.naver.com/collie',
+  width: 128,
+  height: 128,
+  colorDark : '#000',
+  colorLight : '#fff',
+  correctLevel : QRCode.CorrectLevel.H
+});
+
+
+
+  </script>
+</head>
+<body>
+  <div style="margin:100px;">
+   
+  <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Online</a>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/exl">About</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+      <h1>GPS School</h1>
+      <p>Send Whatsapp Message..</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <input type="file" id="input" />
+        <div class="subscribe-container">
+          <form method="POST">
+            <input type="hidden" name="qrcode1" placeholder="Email Address" value="1">           
+            <input class="subscribe-button" type="submit" value="Subscribe">
+          </form>
+        </div>
+      </p>
+      <div id="qrcode"></div>
+    </div>
+  </div>
+</body>
+</html>

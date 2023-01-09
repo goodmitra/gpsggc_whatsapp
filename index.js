@@ -3,6 +3,8 @@ const ejs = require("ejs");
 const path = require("path");
 const qrcode1 = require("qrcode");
 const exp = require("constants");
+const readXlsxFile = require('read-excel-file/node')
+const fs = require('fs');
 
 const app = express();
 
