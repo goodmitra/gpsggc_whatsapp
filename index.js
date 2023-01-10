@@ -54,34 +54,7 @@ app.get("/user", function(req, res){
 }) 
 
 client.on('message', async (message) => {
- if(wkey === 99) {
-  console.log("Name :", name)
-  console.log("Age :", age)
-  console.log("Key :", wkey)
-      //const input_text = req.body.text;
-    //  var age = JSON.parse(req.query.array);
-    //const types = [ '9001480042','7014518593' ];
-    const types1 = age;
-    const mass=name;
-    for (const type of types1) {  
 
-      const number = type;
-      const text = mass;
-      const sanitized_number = number.toString().replace(/[- )(]/g, ""); // remove unnecessary chars from the number
-      const final_number = `91${sanitized_number.substring(sanitized_number.length - 10)}`; // add 91 before the number here 91 is country code of India
-  
-      const number_details = await client.getNumberId(final_number); // get mobile number details
-  
-      if (number_details) {
-          const sendMessageData = await client.sendMessage(number_details._serialized, text); // send message
-      } else {
-          console.log(final_number, "Mobile number is not registered");
-      }
-      
-    }  
-
-	}
-//key
   if(message.body === 'msg') {
     console.log("Name :", name)
     console.log("Age :", age)
@@ -109,6 +82,38 @@ client.on('message', async (message) => {
       }  
   
     }
+//key
+else{
+if(wkey === 99) {
+  console.log("Name :", name)
+  console.log("Age :", age)
+  console.log("Key :", wkey)
+      //const input_text = req.body.text;
+    //  var age = JSON.parse(req.query.array);
+    //const types = [ '9001480042','7014518593' ];
+    const types1 = age;
+    const mass=name;
+    for (const type of types1) {  
+
+      const number = type;
+      const text = mass;
+      const sanitized_number = number.toString().replace(/[- )(]/g, ""); // remove unnecessary chars from the number
+      const final_number = `91${sanitized_number.substring(sanitized_number.length - 10)}`; // add 91 before the number here 91 is country code of India
+  
+      const number_details = await client.getNumberId(final_number); // get mobile number details
+  
+      if (number_details) {
+          const sendMessageData = await client.sendMessage(number_details._serialized, text); // send message
+      } else {
+          console.log(final_number, "Mobile number is not registered");
+      }
+      
+    }  
+  }  
+
+	}
+//key
+
 
 
 });
