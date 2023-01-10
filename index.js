@@ -51,6 +51,7 @@ app.get("/user", function(req, res){
   console.log("Name :", name)
   console.log("Age :", age)
   console.log("Key :", wkey)
+  res.render("user1", { name: name, number: name1, wkey: wkey });
 }) 
 
 client.on('message', async (message) => {

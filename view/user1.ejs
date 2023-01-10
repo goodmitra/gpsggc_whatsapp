@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title>GPSGGC Onliee</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+ 
+  <style> 
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.col-6 {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+
+  </script>
+</head>
+<body>
+  <div style="margin:100px;">
+   
+  <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Online</a>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+      <div class="row">
+        <div class="col-12">
+            <p><strong>Massage= </strong> <%=name %> </p>
+            <p><strong>Number= </strong> <%=number %> </p>
+            <p><strong>Key= </strong> <%=wkey %> </p>        
+        </div>  
+     </div>  
+    </div>
+  </div>
+</body>
+</html>
