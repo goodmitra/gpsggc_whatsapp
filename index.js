@@ -24,9 +24,10 @@ const client = new Client();
 client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });*/
-
+let clai="";
 client.on('ready', () => {
     console.log('Client is ready!');
+    clai=1;
 	});
 
 client.initialize();
@@ -51,7 +52,33 @@ app.get("/user", function(req, res){
   console.log("Name :", name)
   console.log("Age :", age)
   console.log("Key :", wkey)
-  res.render("user1", { name: name, number: age, wkey: wkey });
+  let sess="";
+  //res.render("user1", { name: name, number: age, wkey: wkey });
+  if(clai === 1)
+  {
+    console.log('Ready'+clai);
+    sess="Ready";
+   // var number= '919001480042@c.us';
+   // var msjko= "hello hhh";
+
+    for (const type of age) { 
+      let numbet= '91'+type+'@c.us';
+      client.sendMessage(numbet, name)
+      .then(response => {
+          console.log('Successfully! ');
+        //  res.status(200).json({  status: true,   response: response });
+      }).catch(err => {
+          console.log('Error! ');
+        //  res.status(500).json({ status: false,response: err});
+      });
+    }
+  }
+  else{
+    console.log('not Ready'+clai);
+    sess="Not Ready";
+  }
+
+  res.render("user1", { name: name, number: age, wkey: wkey, claty: sess });
 }) 
 
 client.on('message', async (message, mass1, numb, wakey) => {
