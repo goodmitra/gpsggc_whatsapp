@@ -39,9 +39,9 @@ client.on('message', async (message) => {
 	}
 
 });
-var age=0 ;
-var name =0;
-var wkey =0;
+let age ="" ;
+let name ="";
+let wkey ="";
 
 app.get("/user", function(req, res){  
    name = req.query.name
