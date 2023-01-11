@@ -51,20 +51,27 @@ app.get("/user", function(req, res){
   console.log("Name :", name)
   console.log("Age :", age)
   console.log("Key :", wkey)
- // res.render("user1", { name: name, number: age, wkey: wkey });
+  res.render("user1", { name: name, number: age, wkey: wkey });
 }) 
 
-client.on('message', async (message) => {
+client.on('message', async (message, mass1, numb, wakey) => {
+    mass1=name;
+    numb=age;
+    wakey=wkey;
 
-  if(message.body === 'msg') {
-    console.log("Name :", name)
-    console.log("Age :", age)
-    console.log("Key :", wkey)
+  if(message.body === 'msg') {   
+  //  console.log("Name :", name)
+  //  console.log("Age :", age)
+  //  console.log("Key :", wkey)
+
+    console.log("Name :", mass1)
+    console.log("Age :", numb)
+    console.log("Key :", wakey)
         //const input_text = req.body.text;
       //  var age = JSON.parse(req.query.array);
       //const types = [ '9001480042','7014518593' ];
-      const types1 = age;
-      const mass=name;
+      const types1 = numb;
+      const mass=mass1;
       for (const type of types1) {  
   
         const number = type;
@@ -80,21 +87,21 @@ client.on('message', async (message) => {
             console.log(final_number, "Mobile number is not registered");
         }
         
-      }  
+      }        
   
     }
 //key
-/*
-else{
-if(wkey === 99) {
-  console.log("Name :", name)
-  console.log("Age :", age)
-  console.log("Key :", wkey)
+
+else if(wakey === '99'){
+ 
+    console.log("Name :", mass1)
+    console.log("Age :", numb)
+    console.log("Key :", wakey)
       //const input_text = req.body.text;
     //  var age = JSON.parse(req.query.array);
     //const types = [ '9001480042','7014518593' ];
-    const types1 = age;
-    const mass=name;
+    const types1 = numb;
+    const mass=mass1;
     for (const type of types1) {  
 
       const number = type;
@@ -110,10 +117,10 @@ if(wkey === 99) {
           console.log(final_number, "Mobile number is not registered");
       }
       
-    }  
+      
   }  
 
-	}*/
+	}
 //key
 
 
