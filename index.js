@@ -84,6 +84,7 @@ client.on('message', async (message) => {
   
     }
 //key
+/*
 else{
 if(wkey === 99) {
   console.log("Name :", name)
@@ -112,7 +113,7 @@ if(wkey === 99) {
     }  
   }  
 
-	}
+	}*/
 //key
 
 
