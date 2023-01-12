@@ -13,7 +13,6 @@
 * {
   box-sizing: border-box;
 }
-
 /* Create three equal columns that floats next to each other */
 .col-6 {
   float: left;
@@ -21,7 +20,6 @@
   padding: 10px;
   height: 300px; /* Should be removed. Only for demonstration */
 }
-
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -30,10 +28,50 @@
 }
 </style>
 
+   <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #444444;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+          
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+          
+        .center {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
 
-  </script>
 </head>
 <body>
+ <div id="loader" class="center"></div>
+     <script>
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                  "body").style.visibility = "hidden";
+                document.querySelector(
+                  "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                  "#loader").style.display = "none";
+                document.querySelector(
+                  "body").style.visibility = "visible";
+            }
+        };
+    </script>
   <div style="margin:100px;">
    
   <nav class="navbar navbar-inverse navbar-static-top">
@@ -53,18 +91,30 @@
   </div>
 </nav>
     <div class="jumbotron"  style="padding:40px;">
+	
       <div class="row">
 
       <div class="col-6">
         <h1>GPS School</h1>
         <p>Send Whatsapp Message..</p>
-        <p>
-          <a class="btn btn-primary btn-lg" href="/" role="button">QR Code Again</a>  
+      		<%if (wqr > 0) { %>
+   <p> <h2>Client Ready </h2></p>
+    <p> <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout</a>  </p>
+<% } else { %>
+   <p> <a class="btn btn-primary btn-lg" href="/wa" role="button">QR Code</a>  </p>
+<% } %> 
       </div>
       <div class="col-6" >
-        <center>
+	  		<%if (wqr > 0) { %>
+   <center>  
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXdO89sdLGUyiWotZJp0MJteI8IXCEyEVvQg&usqp=CAU" alt="QR Code"  style="width:300px; height:300px; border-radius: 1%; border: 1px solid;">  
+      </center>
+<% } else { %>
+  <center>  
         <img src=<%=qr_code %> alt="QR Code"  style="width:300px; border-radius: 1%; border: 1px solid;">  
       </center>
+<% } %>
+       
       </div>
 
      </div>     

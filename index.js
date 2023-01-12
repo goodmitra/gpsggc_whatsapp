@@ -6,7 +6,7 @@ const path = require("path");
 const qrcode1 = require("qrcode");
 const exp = require("constants");
 const fs = require('fs');
-const readXlsxFile = require('read-excel-file/node')
+
 
 // New app using express module
 const app = express();
@@ -25,34 +25,67 @@ client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });*/
 let clai="";
+let wqr="";
 client.on('ready', () => {
     console.log('Client is ready!');
     clai=1;
+	wqr=1;
 	});
 
 client.initialize();
 
-client.on('disconnected', async (reason) => {
-  // Destroy and reinitialize the client when disconnected
-  client.destroy();
-  client.initialize();
-});
 
-client.on('message', async (message) => {
-	if(message.body === 'gps') {
-		client.sendMessage(message.from, 'Hello Sir How Can I Help You');
-    console.log(message.from);
-	}
-	else if(message.body === 'hello') {
-		client.sendMessage(message.from, 'Hello Sir How are You');
-	}
-
-});
 let age ="" ;
 let name ="";
-let wkey ="";
+//let wkey ="";
 let wfile ="";
 let sess="";
+
+const port = process.env.port || 5000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "view"));
+
+app.use(express.static("public"));
+
+
+app.get("/", async (req, res, next) => {
+res.render("index",{wqr: wqr,});
+});
+
+app.get('/wa', async (req, res) => {
+ //   const client = new Client(...)
+ if(clai === 1){
+	 let sry="";
+	  res.render("wa", {qr_code: sry, wqr: wqr, });
+ }
+ else{
+	 
+	 let qr = await new Promise((resolve, reject) => {
+        client.on('qr', (qr) => resolve(qr))
+    })
+	qrcode1.toDataURL(qr, (err, src) => {
+    if (err) res.send("Something went wrong!!");
+    res.render("wa", {
+      qr_code: src,
+	  wqr: wqr,
+    });
+	});	 
+ }	
+	
+});
+
+app.get('/logout', async (req, res) => {
+ //   const client = new Client(...)
+  client.destroy();
+  console.log('Client is Remove New Aplly!');
+  client.initialize();	
+  wqr="";
+  clai="";
+  res.render("index",{wqr: wqr,});		
+});
 
 app.get("/user", async (req, res)=>{  
   name = req.query.name
@@ -88,12 +121,10 @@ app.get("/user", async (req, res)=>{
    sess="Not ready";
  }
  res.render("user1", { name: name, number: age, wkey: imk, claty:sess });
-}) 
-
+});
 
 app.get("/user2", async (req, res)=>{  
   name = req.query.name
-//  wkey = req.query.key  
   let imk="No"; 
 
  age = JSON.parse(req.query.array);    
@@ -120,100 +151,20 @@ app.get("/user2", async (req, res)=>{
    sess="Not ready";
  }
  res.render("user1", { name: name, number: age, wkey: imk, claty:sess });
-}) 
+}); 
+
+/*
+client.on('disconnected', async (reason) => {
+  // Destroy and reinitialize the client when disconnected
+   console.log(reason);
+   console.log('rehh'+clai);
+   client.destroy();
+  client.initialize();
+  //wqr="";
+  //clai="";
+});*/
 
 
-
-client.on('message', async (message, mass1, numb, wakey) => {
-    mass1=name;
-    numb=age;
-    wakey=wkey;
-
-  if(message.body === 'msg') {   
-  //  console.log("Name :", name)
-  //  console.log("Age :", age)
-  //  console.log("Key :", wkey)
-
-    console.log("Name :", mass1)
-    console.log("Age :", numb)
-    console.log("Key :", wakey)
-        //const input_text = req.body.text;
-      //  var age = JSON.parse(req.query.array);
-      //const types = [ '9001480042','7014518593' ];
-      const types1 = numb;
-      const mass=mass1;
-      for (const type of types1) {  
-  
-        const number = type;
-        const text = mass;
-        const sanitized_number = number.toString().replace(/[- )(]/g, ""); // remove unnecessary chars from the number
-        const final_number = `91${sanitized_number.substring(sanitized_number.length - 10)}`; // add 91 before the number here 91 is country code of India
-    
-        const number_details = await client.getNumberId(final_number); // get mobile number details
-    
-        if (number_details) {
-            const sendMessageData = await client.sendMessage(number_details._serialized, text); // send message
-        } else {
-            console.log(final_number, "Mobile number is not registered");
-        }
-        
-      }        
-  
-    }
-});
-
-const port = process.env.port || 5000;
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "view"));
-
-app.use(express.static("public"));
-
-
-app.get("/", async (req, res, next) => {
-  res.render("index");
-});
-
-app.post("/", async function(req, res) {
- // var num1 = Number(req.body.num1);
- // var num2 = Number(req.body.num2);
-    
-//  var result = num1 + num2 ;
-    
- // res.send("Addition - " + result);
- var num2 = req.body.input1;
-
-  let qr = await new Promise((resolve, reject) => {
-    client.on('qr', (qr) => resolve(qr))
-  })
-  qrcode1.toDataURL(qr, (err, src) => {
-  if (err) res.send("Something went wrong!!");
-  res.render("wa", {
-  qr_code: src,
-  });  
-  });
-
-});
-
-app.get('/wa', async (req, res) => {
- //   const client = new Client(...)
-    let qr = await new Promise((resolve, reject) => {
-        client.on('qr', (qr) => resolve(qr))
-    })
-	qrcode1.toDataURL(qr, (err, src) => {
-    if (err) res.send("Something went wrong!!");
-    res.render("wa", {
-      qr_code: src,
-    });
-	});
-});
-
-app.post("/scan", (req, res, next) => {
-  const input_text = req.body.text;
-  //var age = JSON.parse(req.query.array);
-});
 
 /*
 app.post("/scan", (req, res, next) => {
