@@ -31,6 +31,13 @@ client.on('ready', () => {
 	});
 
 client.initialize();
+
+client.on('disconnected', async (reason) => {
+  // Destroy and reinitialize the client when disconnected
+  client.destroy();
+  client.initialize();
+});
+
 client.on('message', async (message) => {
 	if(message.body === 'gps') {
 		client.sendMessage(message.from, 'Hello Sir How Can I Help You');
