@@ -96,7 +96,7 @@ app.get("/user", async (req, res)=>{
   const fileUrl=wfile;
 
  age = JSON.parse(req.query.array);    
- console.log("Name :", name)
+ console.log("myName :", name)
  console.log("Age :", age)
  console.log("file :", fileUrl)
  if(clai === 1)
